@@ -1,4 +1,7 @@
 #include "../include/square.hpp"
+#include <math.h>
+
+#define PI 3.14159265
 
 int main(int argc, char **argv)
 {
@@ -7,7 +10,7 @@ int main(int argc, char **argv)
     ros::AsyncSpinner spinner(4);
     spinner.start();
     ros::NodeHandle n;
-    
+   
     // Create PlanningOptions
     MoveitPlanning::PlanningOptions planning_options =
     MoveitPlanning::PlanningOptions();
@@ -64,7 +67,7 @@ int main(int argc, char **argv)
     n.setParam("/record_pose", true);
     arm_move_group.execute(trajectory);
     n.setParam("/record_pose", false);
-    
+   
 
     moveit::planning_interface::MoveGroupInterface::Plan cartesian_plan_2;
 
@@ -130,7 +133,7 @@ int main(int argc, char **argv)
     n.setParam("/record_pose", true);
     arm_move_group.execute(trajectory4);
     n.setParam("/record_pose", false);
-*/
+
     //Horizontal x-y plane
     moveit::planning_interface::MoveGroupInterface::Plan joint_plan;
 
@@ -172,7 +175,7 @@ int main(int argc, char **argv)
     n.setParam("/record_pose", true);
     arm_move_group.execute(trajectory);
     n.setParam("/record_pose", false);
-    
+   
 
     moveit::planning_interface::MoveGroupInterface::Plan cartesian_plan_2;
 
@@ -227,6 +230,111 @@ int main(int argc, char **argv)
     end_pose_4.position.x -= 0.1;
     end_pose_4.position.y -= 0;
     end_pose_4.position.z -= 0;
+
+    // Define waypoints for the cartesian path
+    std::vector<geometry_msgs::Pose> waypoints4;
+    waypoints4.push_back(end_pose_4);
+
+    moveit_msgs::RobotTrajectory trajectory4;
+    trajectory4 = ArmController::planCartesianPath(start_pose_4, waypoints4, reference_frame, arm_move_group);
+
+    n.setParam("/record_pose", true);
+    arm_move_group.execute(trajectory4);
+    n.setParam("/record_pose", false);*/
+
+
+    //Largest not horizontal square
+    float angle = PI/2;
+    float r = 0.45;
+
+    moveit::planning_interface::MoveGroupInterface::Plan pose_plan;
+
+    geometry_msgs::Pose pose_target = arm_move_group.getCurrentPose().pose;
+    pose_target.position.x = 0.0;
+    pose_target.position.y = r * cos(angle);
+    pose_target.position.z = 0.898 + (r * sin(angle));
+
+    bool pose_plan_success;
+    std::string reference_frame = "world";
+    pose_plan_success = ArmController::planToPoseTarget(planning_options, arm_move_group, pose_target, reference_frame, pose_plan);
+
+    if(pose_plan_success){
+        ROS_INFO("Moving to pose target");
+        arm_move_group.execute(pose_plan);
+    }
+
+    moveit::planning_interface::MoveGroupInterface::Plan cartesian_plan_1;
+
+    // Get the start Pose
+    geometry_msgs::Pose start_pose_1 = arm_move_group.getCurrentPose().pose;
+
+    geometry_msgs::Pose end_pose_1 = start_pose_1;
+    end_pose_1.position.x -= 0;
+    end_pose_1.position.y -= 2 * r * cos(angle);
+    end_pose_1.position.z -= 2 * r * sin(angle);
+
+    // Define waypoints for the cartesian path
+    std::vector<geometry_msgs::Pose> waypoints1;
+    waypoints1.push_back(end_pose_1);
+
+    moveit_msgs::RobotTrajectory trajectory1;
+    trajectory1 = ArmController::planCartesianPath(start_pose_1, waypoints1, reference_frame, arm_move_group);
+
+    n.setParam("/record_pose", true);
+    arm_move_group.execute(trajectory1);
+    n.setParam("/record_pose", false);
+
+    moveit::planning_interface::MoveGroupInterface::Plan cartesian_plan_2;
+
+    // Get the start Pose
+    geometry_msgs::Pose start_pose_2 = arm_move_group.getCurrentPose().pose;
+
+    geometry_msgs::Pose end_pose_2 = start_pose_2;
+    end_pose_2.position.x += r;
+    end_pose_2.position.y += r * cos(angle);
+    end_pose_2.position.z += r * sin(angle);
+
+    // Define waypoints for the cartesian path
+    std::vector<geometry_msgs::Pose> waypoints2;
+    waypoints2.push_back(end_pose_2);
+
+    moveit_msgs::RobotTrajectory trajectory2;
+    trajectory2 = ArmController::planCartesianPath(start_pose_2, waypoints2, reference_frame, arm_move_group);
+
+    n.setParam("/record_pose", true);
+    arm_move_group.execute(trajectory2);
+    n.setParam("/record_pose", false);
+
+    moveit::planning_interface::MoveGroupInterface::Plan cartesian_plan_3;
+
+    // Get the start Pose
+    geometry_msgs::Pose start_pose_3 = arm_move_group.getCurrentPose().pose;
+
+    geometry_msgs::Pose end_pose_3 = start_pose_3;
+    end_pose_3.position.x -= 2 * r;
+    end_pose_3.position.y -= 0;
+    end_pose_3.position.z -= 0;
+
+    // Define waypoints for the cartesian path
+    std::vector<geometry_msgs::Pose> waypoints3;
+    waypoints3.push_back(end_pose_3);
+
+    moveit_msgs::RobotTrajectory trajectory3;
+    trajectory3 = ArmController::planCartesianPath(start_pose_3, waypoints3, reference_frame, arm_move_group);
+
+    n.setParam("/record_pose", true);
+    arm_move_group.execute(trajectory3);
+    n.setParam("/record_pose", false);
+
+    moveit::planning_interface::MoveGroupInterface::Plan cartesian_plan_4;
+
+    // Get the start Pose
+    geometry_msgs::Pose start_pose_4 = arm_move_group.getCurrentPose().pose;
+
+    geometry_msgs::Pose end_pose_4 = start_pose_4;
+    end_pose_4.position.x += r;
+    end_pose_4.position.y += r * cos(angle);
+    end_pose_4.position.z += r * sin(angle);
 
     // Define waypoints for the cartesian path
     std::vector<geometry_msgs::Pose> waypoints4;
