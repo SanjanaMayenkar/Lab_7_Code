@@ -25,9 +25,9 @@ int main(int argc, char **argv)
 
     // Create instance of MoveGroupInterface for given joint group
     moveit::planning_interface::MoveGroupInterface arm_move_group("manipulator");
-/*
+
     //Vertical x-z plane
-    moveit::planning_interface::MoveGroupInterface::Plan joint_plan;
+    /*moveit::planning_interface::MoveGroupInterface::Plan joint_plan;
 
     std::map<std::string, double> joint_targets;
     joint_targets["elbow_joint"] = -1.8326;
@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 
     n.setParam("/record_pose", true);
     arm_move_group.execute(trajectory);
-    n.setParam("/record_pose", false);
+    //n.setParam("/record_pose", false);
    
 
     moveit::planning_interface::MoveGroupInterface::Plan cartesian_plan_2;
@@ -86,9 +86,9 @@ int main(int argc, char **argv)
     moveit_msgs::RobotTrajectory trajectory2;
     trajectory2 = ArmController::planCartesianPath(start_pose_2, waypoints2, reference_frame, arm_move_group);
 
-    n.setParam("/record_pose", true);
+    //n.setParam("/record_pose", true);
     arm_move_group.execute(trajectory2);
-    n.setParam("/record_pose", false);
+    //n.setParam("/record_pose", false);
 
 
     moveit::planning_interface::MoveGroupInterface::Plan cartesian_plan_3;
@@ -108,9 +108,9 @@ int main(int argc, char **argv)
     moveit_msgs::RobotTrajectory trajectory3;
     trajectory3 = ArmController::planCartesianPath(start_pose_3, waypoints3, reference_frame, arm_move_group);
 
-    n.setParam("/record_pose", true);
+    //n.setParam("/record_pose", true);
     arm_move_group.execute(trajectory3);
-    n.setParam("/record_pose", false);
+    //n.setParam("/record_pose", false);
 
 
     moveit::planning_interface::MoveGroupInterface::Plan cartesian_plan_4;
@@ -130,9 +130,9 @@ int main(int argc, char **argv)
     moveit_msgs::RobotTrajectory trajectory4;
     trajectory4 = ArmController::planCartesianPath(start_pose_4, waypoints4, reference_frame, arm_move_group);
 
-    n.setParam("/record_pose", true);
+    //n.setParam("/record_pose", true);
     arm_move_group.execute(trajectory4);
-    n.setParam("/record_pose", false);
+    n.setParam("/record_pose", false);*/
 
     //Horizontal x-y plane
     moveit::planning_interface::MoveGroupInterface::Plan joint_plan;
@@ -174,7 +174,7 @@ int main(int argc, char **argv)
 
     n.setParam("/record_pose", true);
     arm_move_group.execute(trajectory);
-    n.setParam("/record_pose", false);
+    //n.setParam("/record_pose", false);
    
 
     moveit::planning_interface::MoveGroupInterface::Plan cartesian_plan_2;
@@ -194,9 +194,9 @@ int main(int argc, char **argv)
     moveit_msgs::RobotTrajectory trajectory2;
     trajectory2 = ArmController::planCartesianPath(start_pose_2, waypoints2, reference_frame, arm_move_group);
 
-    n.setParam("/record_pose", true);
+    //n.setParam("/record_pose", true);
     arm_move_group.execute(trajectory2);
-    n.setParam("/record_pose", false);
+    //n.setParam("/record_pose", false);
 
 
     moveit::planning_interface::MoveGroupInterface::Plan cartesian_plan_3;
@@ -216,9 +216,9 @@ int main(int argc, char **argv)
     moveit_msgs::RobotTrajectory trajectory3;
     trajectory3 = ArmController::planCartesianPath(start_pose_3, waypoints3, reference_frame, arm_move_group);
 
-    n.setParam("/record_pose", true);
+    //n.setParam("/record_pose", true);
     arm_move_group.execute(trajectory3);
-    n.setParam("/record_pose", false);
+    //n.setParam("/record_pose", false);
 
 
     moveit::planning_interface::MoveGroupInterface::Plan cartesian_plan_4;
@@ -238,13 +238,13 @@ int main(int argc, char **argv)
     moveit_msgs::RobotTrajectory trajectory4;
     trajectory4 = ArmController::planCartesianPath(start_pose_4, waypoints4, reference_frame, arm_move_group);
 
-    n.setParam("/record_pose", true);
+    //n.setParam("/record_pose", true);
     arm_move_group.execute(trajectory4);
-    n.setParam("/record_pose", false);*/
+    n.setParam("/record_pose", false);
 
 
     //Largest not horizontal square
-    float angle = PI/2;
+    /*float angle = PI/2;
     float r = 0.45;
 
     moveit::planning_interface::MoveGroupInterface::Plan pose_plan;
@@ -345,5 +345,5 @@ int main(int argc, char **argv)
 
     n.setParam("/record_pose", true);
     arm_move_group.execute(trajectory4);
-    n.setParam("/record_pose", false);
+    n.setParam("/record_pose", false);*/
 }

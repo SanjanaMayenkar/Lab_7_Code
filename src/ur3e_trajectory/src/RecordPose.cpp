@@ -8,7 +8,7 @@ int main(int argc, char **argv)
     spinner.start();
     ros::NodeHandle nh;
     ros::Rate rate(2);
-    std::string out_path = "/home/enee467/catkin_ws/src/ur3e_trajectory/circle.csv";
+    std::string out_path = "/home/enee467/catkin_ws/src/src/ur3e_trajectory/square_two.csv";
 
     bool record_pose;
     int flag = 0;   
